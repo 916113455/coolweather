@@ -2,11 +2,9 @@ package com.coolweather.app.db;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import com.coolweather.app.model.City;
 import com.coolweather.app.model.County;
 import com.coolweather.app.model.Province;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -123,7 +121,7 @@ public class CoolWeatherDB {
 			ContentValues values = new ContentValues();
 			values.put("county_name", county.getCountyName());
 			values.put("county_code", county.getCountyCode());
-			values.put("county_id", county.getCityId());
+			values.put("city_id", county.getCityId());
 			db.insert("County", null, values);
 		}
 	}
@@ -133,9 +131,8 @@ public class CoolWeatherDB {
 	 */
 	public List<County> loadCounties(int cityId) {
 		List<County> list = new ArrayList<County>();
-		Cursor cursor = db.query("County", null, "city_id = ?", 
-				new String[] { String.valueOf(cityId) }, null, null, null);
-		
+		Cursor cursor = db.query("County", null, "city_id = ?",
+				new String[] {String.valueOf(cityId)} , null, null, null);
 		if(cursor.moveToFirst()) {
 			do {
 				County county = new County();
